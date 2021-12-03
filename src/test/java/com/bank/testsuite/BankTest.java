@@ -14,6 +14,14 @@ public class BankTest extends TestBase {
     HomePage homePage = new HomePage();
     OpenAccountPage openAccountPage = new OpenAccountPage();
 
+    String firstName = "Harry";
+    String lastName = "Potter";
+    String fullName = firstName + " " + lastName;
+    String postCode = "HA7 6JJ";
+    String depositAmount = "100";
+    String withdrawalAmount = "50";
+
+
 
     @Test
     public void bankManagerShouldAddCustomerSuccessfully() throws InterruptedException {
@@ -22,11 +30,11 @@ public class BankTest extends TestBase {
         //click On "Add Customer" Tab
         bankManagerLoginPage.clickOnAddCustomerTab();
         //enter FirstName
-        addCustomerPage.enterFirstName("Harry");
+        addCustomerPage.enterFirstName(firstName);
         //enter LastName
-        addCustomerPage.enterLastName("Potter");
+        addCustomerPage.enterLastName(lastName);
         //enter PostCode
-        addCustomerPage.enterCustomersPostCode("HA7 6JJ");
+        addCustomerPage.enterCustomersPostCode(postCode);
         //click On "Add Customer" Button
         addCustomerPage.clickOnTheAddCustomerButton();
         // popup display
@@ -43,7 +51,7 @@ public class BankTest extends TestBase {
         // click On "Open Account" Tab
         bankManagerLoginPage.clickOnOpenAccountTab();
         // Search customer that created in first test
-        openAccountPage.searchForTheCustomerByName("Harry Potter");
+        openAccountPage.searchForTheCustomerByName(fullName);
         // Select currency "Pound"
         openAccountPage.selectPoundAsCurrencyChoice();
         // click on "process" button
@@ -61,7 +69,7 @@ public class BankTest extends TestBase {
         //click on "Customer Login" Tab
         homePage.clickOnCustomerLoginButton();
         //search customer that you created.
-        customerLoginPage.selectYourNameFromDropDown("Harry Potter");
+        customerLoginPage.selectYourNameFromDropDown(fullName);
         //click on "Login" Button
         customerLoginPage.clickOnTheLoginButton();
         //verify "Logout" Tab displayed.
@@ -77,13 +85,13 @@ public class BankTest extends TestBase {
         // click on "Customer Login" Tab
         homePage.clickOnCustomerLoginButton();
         // search customer that you created.
-        customerLoginPage.selectYourNameFromDropDown("Harry Potter");
+        customerLoginPage.selectYourNameFromDropDown(fullName);
         // click on "Login" Button
         customerLoginPage.clickOnTheLoginButton();
         // click on "Deposit" Tab
         customersPage.clickOnDepositTab();
         // Enter amount 100
-        customersPage.enterAmountToDeposit("100");
+        customersPage.enterAmountToDeposit(depositAmount);
         // click on "Deposit" Button
         customersPage.clickOnDepositButton();
         // verify message "Deposit Successful"
@@ -97,14 +105,28 @@ public class BankTest extends TestBase {
         // click on "Customer Login" Tab
         homePage.clickOnCustomerLoginButton();
         // search customer that you created
-        customerLoginPage.selectYourNameFromDropDown("Harry Potter");
+        customerLoginPage.selectYourNameFromDropDown(fullName);
+        // click on "Login" Button
+        customerLoginPage.clickOnTheLoginButton();
+        //make a deposit before withdrawal
+        customersPage.clickOnDepositTab();
+        // Enter amount 100
+        customersPage.enterAmountToDeposit(depositAmount);
+        // click on "Deposit" Button
+        customersPage.clickOnDepositButton();
+        // go back to home page
+        homePage.clickOnHomeButton();
+        //click on customer login Button
+        homePage.clickOnCustomerLoginButton();
+        //search the customer you created
+        customerLoginPage.selectYourNameFromDropDown(fullName);
         // click on "Login" Button
         customerLoginPage.clickOnTheLoginButton();
         // click on "Withdrawal" Tab
         customersPage.clickOnWithdrawlButton();
         //customersPage.clickOnWithdrawlButton();
         // Enter amount 50
-        customersPage.enterAmountToBeWithdrawn("50");
+        customersPage.enterAmountToBeWithdrawn(withdrawalAmount);
         // click on "Deposit" Button
         customersPage.clickOnWithdrawalSubmitButton();
         // verify message "Transaction Successful"
